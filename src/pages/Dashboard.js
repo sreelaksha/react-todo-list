@@ -1,27 +1,33 @@
-import React, {Component} from 'react';
+import React,{ useEffect, useRef, useState }  from 'react';
 import axios from 'axios';
 import TodoEntries from '../components/TodoEntries.js';
+import {Div} from 'atomize';
 
-class Dashboard extends Component{
-    state = {
-                 todo_list : [],
-                 completed:false,
-             }
+ function Dashboard(){
+    const [todoList, setTodoList] = useState([]);
+    const [loading, setLoading] = useState(true);
 
-    componentDidMount () {
-            axios.get('https://jsonplaceholder.typicode.com/todos')
-                .then(response => {
-                    this.setState({todo_list: response.data});
-            })
+
+    async function fetchApiData() {
+        const todos = await axios.get('https://jsonplaceholder.typicode.com/todos')
+            .then(response => {
+                return response.data;
+        });
+        setTodoList(todos);
+        setLoading(false);
     }
 
-    render(){
+    useEffect(() => {
+        fetchApiData();
+    }, []);
+
+
         return(
-                <div>
-                    <TodoEntries data = {this.state.todo_list}/>
-                </div>
+            <Div className="container">
+                <TodoEntries todoList = {todoList} loading={loading} setTodoList={setTodoList}/>
+            </Div>
         );
-    }
+
 }
 
 export default Dashboard;
