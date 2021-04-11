@@ -1,4 +1,4 @@
-import React,{ useEffect, useRef, useState }  from 'react';
+import React,{ useEffect,  useState }  from 'react';
 import axios from 'axios';
 import TodoEntries from '../components/TodoEntries.js';
 import {Div} from 'atomize';
@@ -22,11 +22,11 @@ import {Div} from 'atomize';
     }, []);
 
 
-        return(
-            <Div className="container">
-                <TodoEntries todoList = {todoList} loading={loading} setTodoList={setTodoList}/>
-            </Div>
-        );
+    return(
+        <Div className="container">
+            <TodoEntries todoList = {todoList} loading={loading} setTodoList={setTodoList}/>
+        </Div>
+    );
 
 }
 
