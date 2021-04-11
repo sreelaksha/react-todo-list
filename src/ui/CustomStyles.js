@@ -1,11 +1,13 @@
 import styled from 'styled-components';
-import {Div} from 'atomize';
+import {Div,Input} from 'atomize';
 
 export const DivContainer = styled(Div)`
     text-align:center;
-    text-color:pink;
-}
 `
+
+export const TodoInput = styled(Input)`
+`
+
 export const TodoCard = styled(Div)`
     background-color:${props => props.bg ? props.bg : 'white'};
     padding:${props => props.p ? props.p : '1rem'};
@@ -15,4 +17,17 @@ export const TodoCard = styled(Div)`
     border-radius:0.6rem;
     margin-top:0.5rem;
 `
-
+export const UserCard = styled(Div)`
+    background-color:${props => props.bg ? props.bg : 'white'};
+    padding:${props => props.p ? props.p : '1rem'};
+    display:flex;
+    flex-direction:${props => props.flexDir ? props.flexDir : 'column'};
+    border: 0.5px;
+    border-radius:2.5rem;
+    margin-top:0.5rem;
+`
+export const DivHeader = styled(Div)`
+    span{
+        text-align:right;
+    }
+`
