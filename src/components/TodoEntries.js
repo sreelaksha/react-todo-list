@@ -32,7 +32,7 @@ class TodoEntries extends Component {
 
         return(
             <>
-                <DivContainer m={{ x: { xs: '', md: '1rem', lg:'20rem' }}}>
+                <DivContainer m={{ x: { xs: '', md: '1rem', lg:'15rem' }}}>
                     {loading && <Div>Loading Data...</Div>}
                     {!loading &&
                         <Col>
@@ -56,7 +56,7 @@ class TodoEntries extends Component {
                                             </Label>
                                             <Tag><Icon name="UserCircle" color="black" size="18px"/> {data.userId}</Tag>
                                     </Row>
-                                     </TodoCard>
+                                </TodoCard>
                                 )
                             })}
                         </Col>
