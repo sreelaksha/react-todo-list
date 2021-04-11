@@ -2,6 +2,7 @@ import React,{ useEffect,  useState }  from 'react';
 import axios from 'axios';
 import TodoEntries from '../components/TodoEntries.js';
 import {Div} from 'atomize';
+import Header from '../components/Header.js';
 
  function Dashboard(){
     const [todoList, setTodoList] = useState([]);
@@ -23,9 +24,12 @@ import {Div} from 'atomize';
 
 
     return(
-        <Div className="container">
-            <TodoEntries todoList = {todoList} loading={loading} setTodoList={setTodoList}/>
-        </Div>
+        <>
+            <Header/>
+            <Div className="container">
+                <TodoEntries todoList = {todoList} loading={loading} setTodoList={setTodoList}/>
+            </Div>
+        </>
     );
 
 }

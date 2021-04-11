@@ -10,6 +10,7 @@ const theme = {
     textSize:{
         size: {
             F16:'16px',
+            F24:'24px',
         }
     },
     fontFamily: {

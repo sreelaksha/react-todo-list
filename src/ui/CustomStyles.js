@@ -15,4 +15,8 @@ export const TodoCard = styled(Div)`
     border-radius:0.6rem;
     margin-top:0.5rem;
 `
-
+export const DivHeader = styled(Div)`
+    span{
+        text-align:right;
+    }
+`

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Div,Col,Row,Text,Checkbox, Label,Notification,Icon} from 'atomize';
+import {Div,Col,Row,Text,Checkbox, Label,Notification,Icon,Tag} from 'atomize';
 import {DivContainer,TodoCard} from '../ui/CustomStyles.js';
 
 class TodoEntries extends Component {
@@ -43,7 +43,7 @@ class TodoEntries extends Component {
                                 <TodoCard shadow='2'
                                   hoverShadow='4'
                                   transition key={index}>
-                                    <Row>
+                                    <Row d='flex' justify='space-between' align='center'>
                                             <Label>
                                                     <Checkbox
                                                         onChange={() => this.toggleTaskCompleted(data.id)}
@@ -54,6 +54,7 @@ class TodoEntries extends Component {
                                                         />
                                                     <Text style={{ textDecoration: data.completed ? "line-through":""}}> {data.title}</Text>
                                             </Label>
+                                            <Tag><Icon name="UserCircle" color="black" size="18px"/> {data.userId}</Tag>
                                     </Row>
                                      </TodoCard>
                                 )
