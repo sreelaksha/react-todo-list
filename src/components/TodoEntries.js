@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Div,Col,Row,Text,Checkbox, Label,Notification,Icon,Tag} from 'atomize';
-import {DivContainer,TodoCard} from '../ui/CustomStyles.js';
+import {DivContainer,TodoCard,TodoInput} from '../ui/CustomStyles.js';
 
 class TodoEntries extends Component {
 
@@ -28,38 +28,62 @@ class TodoEntries extends Component {
 
     render(){
         const loading = this.props.loading;
-        const todoList = this.props.todoList;
+        let todoList = this.props.todoList;
+        const selectedUserId = this.props.selectedUserId;
+
+        if(selectedUserId !== ""){
+            todoList = todoList.filter(task => task.userId === selectedUserId);
+        }
 
         return(
             <>
                 <DivContainer m={{ x: { xs: '', md: '1rem', lg:'15rem' }}}>
                     {loading && <Div>Loading Data...</Div>}
                     {!loading &&
-                        <Col>
-                            { todoList &&
-                            todoList.sort((a, b) => a.completed ? 1 : -1)
-                            .map((data,index) => {
-                                return(
-                                <TodoCard shadow='2'
-                                  hoverShadow='4'
-                                  transition key={index}>
-                                    <Row d='flex' justify='space-between' align='center'>
-                                            <Label>
-                                                    <Checkbox
-                                                        onChange={() => this.toggleTaskCompleted(data.id)}
-                                                        checked={data.completed}
-                                                        inactiveColor="success400"
-                                                        activeColor="success700"
-                                                        size="24px"
-                                                        />
-                                                    <Text style={{ textDecoration: data.completed ? "line-through":""}}> {data.title}</Text>
-                                            </Label>
-                                            <Tag><Icon name="UserCircle" color="black" size="18px"/> {data.userId}</Tag>
-                                    </Row>
-                                </TodoCard>
-                                )
-                            })}
-                        </Col>
+                        <>
+                            <Col>
+                                <Div p={{ xs: '1rem', md: '2rem' }}>
+                                    <TodoInput
+                                      placeholder="Add task"
+                                      suffix={
+                                        <Icon
+                                          name="Add"
+                                          size="20px"
+                                          cursor="pointer"
+                                          onClick={() => console.log("clicked")}
+                                          pos="absolute"
+                                          top="50%"
+                                          right="1rem"
+                                          transform="translateY(-50%)"
+                                        />
+                                      }
+                                    />
+                                </Div>
+                                { todoList &&
+                                todoList.sort((a, b) => a.completed ? 1 : -1)
+                                .map((data,index) => {
+                                    return(
+                                    <TodoCard shadow='2'
+                                      hoverShadow='4'
+                                      transition key={index}>
+                                        <Row d='flex' justify='space-between' align='center'>
+                                                <Label>
+                                                        <Checkbox
+                                                            onChange={() => this.toggleTaskCompleted(data.id)}
+                                                            checked={data.completed}
+                                                            inactiveColor="success400"
+                                                            activeColor="success700"
+                                                            size="24px"
+                                                            />
+                                                        <Text style={{ textDecoration: data.completed ? "line-through":""}}> {data.title}</Text>
+                                                </Label>
+                                                <Tag><Icon name="UserCircle" color="black" size="18px"/> {data.userId}</Tag>
+                                        </Row>
+                                    </TodoCard>
+                                    )
+                                })}
+                            </Col>
+                        </>
                     }
                 </DivContainer>
 

@@ -1,10 +1,13 @@
 import styled from 'styled-components';
-import {Div} from 'atomize';
+import {Div,Input} from 'atomize';
 
 export const DivContainer = styled(Div)`
     text-align:center;
-}
 `
+
+export const TodoInput = styled(Input)`
+`
+
 export const TodoCard = styled(Div)`
     background-color:${props => props.bg ? props.bg : 'white'};
     padding:${props => props.p ? props.p : '1rem'};
