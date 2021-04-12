@@ -9,7 +9,7 @@ function Header(props){
     return(
         <DivHeader className='container' d='flex' justify='space-between' align='center' h='5rem'>
             <Text textSize="F24" tag="h1">TODO APP</Text>
-            <DropdownButton id="dropdown-basic-button" title="Select User">
+            <DropdownButton title="Select User">
                   <Dropdown.Item onClick={() => props.setSelectedUserId("")} >NONE</Dropdown.Item>
                      { userList &&
                             userList.map((data,index) => {
@@ -17,7 +17,8 @@ function Header(props){
                              })
                      }
                      { !userList &&
-                           <Dropdown.Item>Loading...</Dropdown.Item>
+                           <Dropdown.Item>
+                           ...</Dropdown.Item>
                      }
             </DropdownButton>
         </DivHeader>
