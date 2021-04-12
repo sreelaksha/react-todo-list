@@ -58,7 +58,7 @@ class TodoEntries extends Component {
 
         return(
             <>
-                <DivContainer m={{ x: { xs: '', md: '1rem', lg:'15rem' }}}>
+                <DivContainer m={{ x: { sm: '', md: '1rem', lg:'8rem', xl:'15rem' }}}>
                     {loading && <Div>Loading Data...</Div>}
                     {!loading &&
                         <>
@@ -101,7 +101,7 @@ class TodoEntries extends Component {
                                                             activeColor="success700"
                                                             size="24px"
                                                             />
-                                                        <Text w={{xs:"18rem", sm: '25rem', md: '30rem'}} style={{textAlign:"left", textDecoration: data.completed ? "line-through":""}}> {data.title}</Text>
+                                                        <Text w={{xs:"10rem", sm: '18rem', md: '30rem'}} style={{textAlign:"left", textDecoration: data.completed ? "line-through":""}}> {data.title}</Text>
                                                 </Label>
                                                 <Tag><Icon name="UserCircle" color="black" size="18px"/> {data.userId}</Tag>
                                         </Row>

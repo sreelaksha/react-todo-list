@@ -23,6 +23,8 @@ function App() {
                         <Switch>
                             <Route path = "/" exact component = {Dashboard} ></Route>
                             <Route path = "/users" component = {Users} ></Route>
+                            <Route path = "/react-todo-list" exact component = {Dashboard} ></Route>
+                            <Route path = "/react-todo-list/users" component = {Users} ></Route>
                         </Switch>
                     </BrowserRouter>
                 </StyletronProvider>
