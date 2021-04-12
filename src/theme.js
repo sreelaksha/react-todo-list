@@ -5,7 +5,7 @@ const theme = {
     colors:{
         primaryDark:'#3e3d3cs',
         successDark:'success700',
-        successLight:'success400',
+        successLight:'#6b5b95',
     },
     textSize:{
         size: {

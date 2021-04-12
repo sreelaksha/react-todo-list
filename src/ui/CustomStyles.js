@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import {Div,Input} from 'atomize';
+import {Div,Input, Text} from 'atomize';
 
 export const DivContainer = styled(Div)`
     text-align:center;
@@ -30,4 +30,7 @@ export const DivHeader = styled(Div)`
     span{
         text-align:right;
     }
+`
+export const UserSelectedText = styled(Text)`
+    color: ${props => props.theme.colors.successLight};
 `
