@@ -1,11 +1,13 @@
 import React, {Component} from 'react';
 import {Div,Col,Row,Text,Checkbox, Label,Notification,Icon,Tag} from 'atomize';
-import {DivContainer,TodoCard,TodoInput} from '../ui/CustomStyles.js';
+import {DivContainer,TodoCard,TodoInput, UserSelectedText} from '../ui/CustomStyles.js';
 
 class TodoEntries extends Component {
 
     state = {
         showTaskCompletedNotification: false,
+        showTaskAddedNotification: false,
+        input:'',
     }
 
     toggleTaskCompleted(id) {
@@ -24,13 +26,32 @@ class TodoEntries extends Component {
           this.setState({ showTaskCompletedNotification: true});
        }
        this.props.setTodoList(newTodoList);
+    }
+
+    handleChange = (e) => {
+        this.setState({input: e.target.value});
      }
+
+    handleNewEntry = (selectedUserId) => {
+        const title = this.state.input;
+        let newEntry = {
+                        "userId": selectedUserId,
+                        "id": Math.floor(Math.random()*selectedUserId),
+                        "title": title,
+                        "completed": false,
+                      };
+        const todoList = this.props.todoList;
+        todoList.push(newEntry);
+        const newTodoList = todoList;
+        this.props.setTodoList(newTodoList);
+        this.setState({ input: ''});
+        this.setState({ showTaskAddedNotification: true});
+    }
 
     render(){
         const loading = this.props.loading;
         let todoList = this.props.todoList;
         const selectedUserId = this.props.selectedUserId;
-
         if(selectedUserId !== ""){
             todoList = todoList.filter(task => task.userId === selectedUserId);
         }
@@ -42,15 +63,19 @@ class TodoEntries extends Component {
                     {!loading &&
                         <>
                             <Col>
-                                <Div p={{ xs: '1rem', md: '2rem' }}>
+                                 { selectedUserId !== "" &&
+                                <Div p={{ xs: '0.5rem', md: '1rem' }}>
+                                    <UserSelectedText textSize="F16" tag='h2'  p={{ xs: '0.5rem', md: '1rem' }}> User selected: {selectedUserId}</UserSelectedText>
                                     <TodoInput
                                       placeholder="Add task"
+                                      onChange = {this.handleChange}
+                                      value={this.state.input}
                                       suffix={
                                         <Icon
                                           name="Add"
                                           size="20px"
                                           cursor="pointer"
-                                          onClick={() => console.log("clicked")}
+                                          onClick={() => this.handleNewEntry(selectedUserId)}
                                           pos="absolute"
                                           top="50%"
                                           right="1rem"
@@ -59,6 +84,7 @@ class TodoEntries extends Component {
                                       }
                                     />
                                 </Div>
+                                }
                                 { todoList &&
                                 todoList.sort((a, b) => a.completed ? 1 : -1)
                                 .map((data,index) => {
@@ -75,7 +101,7 @@ class TodoEntries extends Component {
                                                             activeColor="success700"
                                                             size="24px"
                                                             />
-                                                        <Text style={{ textDecoration: data.completed ? "line-through":""}}> {data.title}</Text>
+                                                        <Text w={{xs:"18rem", sm: '25rem', md: '30rem'}} style={{textAlign:"left", textDecoration: data.completed ? "line-through":""}}> {data.title}</Text>
                                                 </Label>
                                                 <Tag><Icon name="UserCircle" color="black" size="18px"/> {data.userId}</Tag>
                                         </Row>
@@ -101,6 +127,22 @@ class TodoEntries extends Component {
                      }
                    >
                     Task Completed!
+                </Notification>
+
+                <Notification
+                     bg="info700"
+                     isOpen={this.state.showTaskAddedNotification}
+                     onClose={() => this.setState({ showTaskAddedNotification: false })}
+                     prefix={
+                       <Icon
+                         name="InfoSolid"
+                         color="white"
+                         size="18px"
+                         m={{ r: "0.5rem" }}
+                       />
+                     }
+                   >
+                    Task Added and Assigned to User {selectedUserId}!
                 </Notification>
             </>
          )
